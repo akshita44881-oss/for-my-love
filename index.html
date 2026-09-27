@@ -1,44 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Just For You 💜</title>
 
-    <!-- Our CSS file -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Just For You</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
-    <!-- =========================
-         PAGE 1 — THE QUESTION
-    ========================== -->
+
+    <!-- =====================================
+         PAGE 1
+         QUESTION
+    ====================================== -->
+
     <section id="page1" class="page active">
+
+        <div class="background-glow"></div>
 
         <div class="stars"></div>
 
+
         <div class="content">
 
-            <div class="question-box">
-                <h1 id="question">
-                    I made something for you...<br>
-                    wanna see it? 💜
-                </h1>
+            <h1 id="question">
+                I made something for you...<br>
+                wanna see it? 💜
+            </h1>
+
+
+            <!-- TEDDY -->
+
+            <div class="teddy-area">
+
+                <div id="teddy" class="teddy">
+
+                    <!-- ears -->
+                    <div class="ear left-ear"></div>
+                    <div class="ear right-ear"></div>
+
+                    <!-- head -->
+                    <div class="teddy-head">
+
+                        <div class="eye left-eye"></div>
+                        <div class="eye right-eye"></div>
+
+                        <div class="nose"></div>
+
+                        <div class="mouth"></div>
+
+                    </div>
+
+
+                    <!-- body -->
+                    <div class="teddy-body"></div>
+
+
+                    <!-- arms -->
+                    <div class="arm left-arm"></div>
+                    <div class="arm right-arm"></div>
+
+
+                    <!-- feet -->
+                    <div class="foot left-foot"></div>
+                    <div class="foot right-foot"></div>
+
+
+                    <!-- PINK HEART -->
+                    <div class="pink-heart">
+                        ♥
+                    </div>
+
+                </div>
+
             </div>
 
-            <!-- Teddy -->
-            <div id="teddy" class="teddy">
-                🧸
-            </div>
 
-            <p id="reaction">
-                Choose wisely hehe 👀
-            </p>
+            <p id="reaction"></p>
+
+
+            <!-- BUTTONS -->
 
             <div class="buttons">
-                <button id="yesBtn" onclick="sayYes()">YES 💜</button>
-                <button id="noBtn" onclick="sayNo()">NO</button>
+
+                <button id="yesBtn" onclick="sayYes()">
+                    YES 💜
+                </button>
+
+                <button id="noBtn" onclick="sayNo()">
+                    NO
+                </button>
+
             </div>
 
         </div>
@@ -46,27 +104,38 @@
     </section>
 
 
-    <!-- =========================
-         PAGE 2 — BOYFRIEND DAY
-    ========================== -->
+
+    <!-- =====================================
+         PAGE 2
+         HAPPY BOYFRIEND DAY
+    ====================================== -->
+
     <section id="page2" class="page">
 
-        <div class="glow-particles"></div>
+        <div class="stars"></div>
 
         <div class="content">
 
-            <p class="small-text">A little something for you...</p>
+            <p class="small-text">
+                A little something for you...
+            </p>
+
 
             <h1 class="neon-title">
                 HAPPY<br>
                 BOYFRIEND DAY
             </h1>
 
-            <div class="heart-glow">
+
+            <div class="glowing-heart">
                 💜
             </div>
 
-            <button class="next-btn" onclick="goToPage(3)">
+
+            <button
+                class="next-btn"
+                onclick="goToPage(3)"
+            >
                 ➜
             </button>
 
@@ -75,59 +144,92 @@
     </section>
 
 
-    <!-- =========================
-         PAGE 3 — CHOOSE YOUR GIFT
-    ========================== -->
+
+    <!-- =====================================
+         PAGE 3
+         CHOOSE A GIFT
+    ====================================== -->
+
     <section id="page3" class="page">
 
+        <div class="stars"></div>
+
         <div class="content">
+
 
             <h1 class="page-title">
                 Choose ur gift 🎁
             </h1>
 
+
             <p class="subtitle">
-                You can choose only ONE...<br>
-                choose wisely 👀💙
+                Pick one 💜
             </p>
+
+
+            <!-- THREE MYSTERY GIFTS -->
 
             <div class="gifts">
 
-                <!-- Gift 1 -->
-                <div class="gift" id="gift1" onclick="openGift(1)">
-                    <div class="gift-box">🎁</div>
-                    <h2>3 Wishes</h2>
-                    <p>Ask for anything 💜</p>
+
+                <div
+                    class="gift"
+                    id="gift1"
+                    onclick="openGift(1)"
+                >
+
+                    <div class="gift-box">
+
+                        <div class="box-lid"></div>
+
+                        <div class="box-body"></div>
+
+                        <div class="box-ribbon"></div>
+
+                    </div>
+
                 </div>
 
-                <!-- Gift 2 -->
-                <div class="gift" id="gift2" onclick="openGift(2)">
-                    <div class="gift-box">🎁</div>
-                    <h2>Unlimited Kisses</h2>
-                    <p>Through VM hehe 💋</p>
+
+
+                <div
+                    class="gift"
+                    id="gift2"
+                    onclick="openGift(2)"
+                >
+
+                    <div class="gift-box">
+
+                        <div class="box-lid"></div>
+
+                        <div class="box-body"></div>
+
+                        <div class="box-ribbon"></div>
+
+                    </div>
+
                 </div>
 
-                <!-- Gift 3 -->
-                <div class="gift" id="gift3" onclick="openGift(3)">
-                    <div class="gift-box">🎁</div>
-                    <h2>One Special Request</h2>
-                    <p>Ask me for one thing ✨</p>
+
+
+                <div
+                    class="gift"
+                    id="gift3"
+                    onclick="openGift(3)"
+                >
+
+                    <div class="gift-box">
+
+                        <div class="box-lid"></div>
+
+                        <div class="box-body"></div>
+
+                        <div class="box-ribbon"></div>
+
+                    </div>
+
                 </div>
 
-            </div>
-
-            <!-- Gift result -->
-            <div id="giftResult" class="gift-result">
-
-                <div id="giftResultEmoji"></div>
-
-                <h2 id="giftResultTitle"></h2>
-
-                <p id="giftResultText"></p>
-
-                <button class="next-btn" onclick="goToPage(4)">
-                    ➜
-                </button>
 
             </div>
 
@@ -136,57 +238,140 @@
     </section>
 
 
-    <!-- =========================
-         PAGE 4 — THE LETTER
-    ========================== -->
+
+    <!-- =====================================
+         GIFT REVEAL PAGE
+    ====================================== -->
+
+    <section id="giftReveal" class="page">
+
+        <div class="stars"></div>
+
+        <div class="content reveal-content">
+
+
+            <div id="revealEmoji" class="reveal-emoji">
+                🎁
+            </div>
+
+
+            <p class="reveal-small">
+                You got...
+            </p>
+
+
+            <h1
+                id="revealTitle"
+                class="reveal-title"
+            >
+                YOUR SURPRISE
+            </h1>
+
+
+            <p
+                id="revealText"
+                class="reveal-text"
+            >
+                Something special just for you 💜
+            </p>
+
+
+            <button
+                class="next-btn"
+                onclick="goToPage(4)"
+            >
+                ➜
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         PAGE 4
+         LETTER
+    ====================================== -->
+
     <section id="page4" class="page">
+
+        <div class="stars"></div>
 
         <div class="content">
 
-            <div id="envelope" class="envelope" onclick="openLetter()">
 
-                <div class="envelope-top"></div>
+            <!-- ENVELOPE -->
 
-                <div class="envelope-body">
+            <div
+                id="envelope"
+                class="envelope"
+                onclick="openLetter()"
+            >
+
+                <div class="envelope-back"></div>
+
+                <div class="envelope-paper">
                     💌
                 </div>
 
+                <div class="envelope-flap"></div>
+
             </div>
+
 
             <p id="envelopeText">
                 Tap the letter 💜
             </p>
 
 
-            <!-- Temporary letter -->
-            <div id="letter" class="letter">
 
-                <h1>For You 💜</h1>
+            <!-- TEMPORARY LETTER -->
+
+            <div
+                id="letter"
+                class="letter"
+            >
+
+                <h1>
+                    For You 💜
+                </h1>
+
 
                 <p>
                     Hey you...
                 </p>
 
-                <p>
-                    This is just a little something I made for you.
-                    It's not perfect, but I hope it makes you smile.
-                </p>
 
                 <p>
-                    Thank you for being someone who makes my days
-                    a little brighter and a lot more special.
+                    This is just a little something I made
+                    for you. It's not perfect, but I hope
+                    it makes you smile.
                 </p>
+
+
+                <p>
+                    Thank you for being someone who makes
+                    my days a little brighter and a lot
+                    more special.
+                </p>
+
 
                 <p>
                     There's a lot more I want to say,
                     but I'll save the real words for later. 👀
                 </p>
 
+
                 <p class="signature">
                     — Yours 💜
                 </p>
 
-                <button class="next-btn" onclick="goToPage(5)">
+
+                <button
+                    class="next-btn"
+                    onclick="goToPage(5)"
+                >
                     ➜
                 </button>
 
@@ -197,26 +382,33 @@
     </section>
 
 
-    <!-- =========================
-         PAGE 5 — FINAL
-    ========================== -->
+
+    <!-- =====================================
+         PAGE 5
+         FINAL
+    ====================================== -->
+
     <section id="page5" class="page">
 
         <div id="heartContainer"></div>
 
+
         <div class="content final-content">
+
 
             <div class="final-teddy">
                 🧸
             </div>
+
 
             <h1 class="final-title">
                 I LOVE<br>
                 MY BOYFRIEND
             </h1>
 
-            <p class="final-subtitle">
-                💜💙💜
+
+            <p class="final-hearts">
+                 💙 
             </p>
 
         </div>
@@ -224,8 +416,11 @@
     </section>
 
 
-    <!-- Our JavaScript file -->
+
+    <!-- JAVASCRIPT -->
+
     <script src="script.js"></script>
 
 </body>
+
 </html>

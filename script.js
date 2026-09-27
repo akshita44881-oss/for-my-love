@@ -1,9 +1,15 @@
 /* =========================================
-   WEBSITE VARIABLES
+   WEBSITE SCRIPT
+========================================= */
+
+
+/* =========================================
+   VARIABLES
 ========================================= */
 
 let noCount = 0;
 let giftChosen = false;
+let heartInterval = null;
 
 
 /* =========================================
@@ -12,19 +18,29 @@ let giftChosen = false;
 
 function goToPage(pageNumber) {
 
-    // Hide every page
-    document.querySelectorAll(".page").forEach(page => {
+    const pages = document.querySelectorAll(".page");
+
+    pages.forEach(page => {
         page.classList.remove("active");
     });
 
-    // Show requested page
-    const nextPage = document.getElementById("page" + pageNumber);
 
-    if (nextPage) {
-        nextPage.classList.add("active");
+    let targetPage;
+
+    if (pageNumber === 4) {
+        targetPage = document.getElementById("page4");
+    } else {
+        targetPage = document.getElementById("page" + pageNumber);
     }
 
-    // Start hearts when reaching final page
+
+    if (targetPage) {
+        targetPage.classList.add("active");
+    }
+
+
+    /* Start floating hearts on final page */
+
     if (pageNumber === 5) {
         startHeartAnimation();
     }
@@ -32,130 +48,107 @@ function goToPage(pageNumber) {
 
 
 /* =========================================
-   PAGE 1 — NO BUTTON
+   NO BUTTON
 ========================================= */
 
 function sayNo() {
 
     noCount++;
 
+
     const teddy = document.getElementById("teddy");
     const question = document.getElementById("question");
     const reaction = document.getElementById("reaction");
-    const yesButton = document.getElementById("yesBtn");
-    const noButton = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
 
 
-    // Make teddy sad
+    /* Make teddy sad */
+
     teddy.classList.add("sad");
 
 
-    /* -----------------------------------------
-       Change messages depending on NO count
-    ----------------------------------------- */
+    /* Change messages */
 
     if (noCount === 1) {
 
         question.innerHTML =
-            "Why tap on no? 🥺<br>Try again...";
+            "Are you sure? 🥺";
 
         reaction.innerHTML =
-            "The teddy is already sad 💔";
+            "The teddy is getting sad... 💔";
 
     }
 
     else if (noCount === 2) {
 
         question.innerHTML =
-            "Umm... that was the wrong button 👀";
+            "Really?? 😭";
 
         reaction.innerHTML =
-            "Maybe try YES this time? 💜";
+            "Think again... please? 🥺💜";
 
     }
 
     else if (noCount === 3) {
 
         question.innerHTML =
-            "Are you REALLY saying no? 😭";
+            "You REALLY said no? 😭";
 
         reaction.innerHTML =
-            "I'm giving you another chance...";
+            "Okay but... look at the teddy 🥺";
 
     }
 
     else if (noCount === 4) {
 
         question.innerHTML =
-            "Okay... I see how it is. 🥲";
+            "Come onnnnn 😭💜";
 
         reaction.innerHTML =
-            "The YES button is getting bigger btw 👀";
-
-    }
-
-    else if (noCount === 5) {
-
-        question.innerHTML =
-            "PLEASE JUST SAY YES 😭💜";
-
-        reaction.innerHTML =
-            "Why are we doing this...";
+            "The YES button is looking pretty good right now... 👀";
 
     }
 
     else {
 
         question.innerHTML =
-            "THERE IS ONLY ONE CORRECT ANSWER NOW 😭";
+            "Okay okay... just press YES 😭💜";
 
         reaction.innerHTML =
-            "The YES button has had enough.";
+            "I'll stop bothering you after this... maybe 👀";
 
     }
 
 
-    /* -----------------------------------------
-       YES button grows every time NO is clicked
-    ----------------------------------------- */
+    /* Make YES bigger */
 
-    let newScale = 1 + (noCount * 0.25);
+    let yesScale = 1 + (noCount * 0.25);
 
-    // Prevent it from becoming ridiculously huge
-    newScale = Math.min(newScale, 3.5);
+    if (yesScale > 3.5) {
+        yesScale = 3.5;
+    }
 
-    yesButton.style.transform = `scale(${newScale})`;
-
-
-    /* -----------------------------------------
-       Make NO button slightly smaller
-    ----------------------------------------- */
-
-    let noScale = Math.max(1 - (noCount * 0.08), 0.55);
-
-    noButton.style.transform = `scale(${noScale})`;
+    yesBtn.style.transform = `scale(${yesScale})`;
 
 
-    /* -----------------------------------------
-       After several NO clicks, move the NO button
-    ----------------------------------------- */
+    /* Make NO smaller after several clicks */
 
-    if (noCount >= 4) {
+    if (noCount >= 3) {
 
-        const randomX =
-            Math.floor(Math.random() * 120) - 60;
+        let noScale = 1 - ((noCount - 2) * 0.12);
 
-        const randomY =
-            Math.floor(Math.random() * 80) - 40;
+        if (noScale < 0.45) {
+            noScale = 0.45;
+        }
 
-        noButton.style.transform =
-            `translate(${randomX}px, ${randomY}px) scale(${noScale})`;
+        noBtn.style.transform = `scale(${noScale})`;
     }
 }
 
 
 /* =========================================
-   PAGE 1 — YES BUTTON
+   YES BUTTON
 ========================================= */
 
 function sayYes() {
@@ -164,132 +157,134 @@ function sayYes() {
     const question = document.getElementById("question");
     const reaction = document.getElementById("reaction");
 
-    // Make teddy happy again
+
     teddy.classList.remove("sad");
 
+
     question.innerHTML =
-        "I KNEW YOU'D SAY YES! 💜";
+        "YAYYYYY!! 💜";
+
 
     reaction.innerHTML =
-        "Okay... let's go ✨";
+        "I knew you'd say yes hehe 🥰";
 
-    // Small delay before transition
+
+    /* Go to next page */
+
     setTimeout(() => {
+
         goToPage(2);
+
     }, 1000);
 }
 
 
 /* =========================================
-   PAGE 3 — GIFT SYSTEM
+   GIFT SYSTEM
 ========================================= */
 
 function openGift(giftNumber) {
 
-    // Prevent choosing another gift
+    /* Prevent choosing another gift */
+
     if (giftChosen) {
         return;
     }
 
+
     giftChosen = true;
 
 
-    const gift1 = document.getElementById("gift1");
-    const gift2 = document.getElementById("gift2");
-    const gift3 = document.getElementById("gift3");
-
-    const selectedGift =
-        document.getElementById("gift" + giftNumber);
+    const gifts = document.querySelectorAll(".gift");
 
 
-    /* -----------------------------------------
-       Lock every gift
-    ----------------------------------------- */
+    /* Lock all gifts */
 
-    [gift1, gift2, gift3].forEach(gift => {
+    gifts.forEach(gift => {
 
         gift.classList.add("locked");
 
     });
 
 
-    // Highlight selected gift
-    selectedGift.classList.remove("locked");
+    /* Highlight selected gift */
+
+    const selectedGift =
+        document.getElementById("gift" + giftNumber);
+
     selectedGift.classList.add("selected");
 
 
-    /* -----------------------------------------
-       Gift information
-    ----------------------------------------- */
+    /* Reveal information */
 
-    const resultEmoji =
-        document.getElementById("giftResultEmoji");
+    const revealEmoji =
+        document.getElementById("revealEmoji");
 
-    const resultTitle =
-        document.getElementById("giftResultTitle");
+    const revealTitle =
+        document.getElementById("revealTitle");
 
-    const resultText =
-        document.getElementById("giftResultText");
+    const revealText =
+        document.getElementById("revealText");
 
 
     if (giftNumber === 1) {
 
-        resultEmoji.innerHTML = "💜🎁";
+        revealEmoji.innerHTML = "✨";
 
-        resultTitle.innerHTML =
-            "You got 3 wishes!";
+        revealTitle.innerHTML =
+            "3 WISHES";
 
-        resultText.innerHTML =
-            "Yayyy! You have three wishes now. " +
-            "Ask for anything you want... " +
-            "but choose them wisely hehe 👀💜";
+        revealText.innerHTML =
+            "Yayyy! You got three wishes. Ask for anything you want... and I'll try my best to make them happen. 💜";
 
     }
 
 
     else if (giftNumber === 2) {
 
-        resultEmoji.innerHTML = "💋💙";
+        revealEmoji.innerHTML = "💋";
 
-        resultTitle.innerHTML =
-            "Unlimited Kisses!";
+        revealTitle.innerHTML =
+            "UNLIMITED KISSES";
 
-        resultText.innerHTML =
-            "Yep... unlimited. Through VM hehe. " +
-            "Don't blame me if you run out of storage 😂💜";
+        revealText.innerHTML =
+            "Yep... unlimited kisses. Through VM hehe. 💋💜";
 
     }
 
 
     else if (giftNumber === 3) {
 
-        resultEmoji.innerHTML = "✨💌";
+        revealEmoji.innerHTML = "💙";
 
-        resultTitle.innerHTML =
-            "One Special Request!";
+        revealTitle.innerHTML =
+            "ONE SPECIAL REQUEST";
 
-        resultText.innerHTML =
-            "You unlocked your special request. " +
-            "Ask me for one thing... " +
-            "and I'll try my best to make it happen. 💙";
+        revealText.innerHTML =
+            "You unlocked your special request. Ask me for one thing... and I'll try my best to make it happen. 💙";
 
     }
 
 
-    /* -----------------------------------------
-       Show result
-    ----------------------------------------- */
+    /* Small delay before reveal */
 
-    const result =
-        document.getElementById("giftResult");
+    setTimeout(() => {
 
-    result.classList.add("show");
+        document.querySelectorAll(".page").forEach(page => {
+            page.classList.remove("active");
+        });
 
+
+        document
+            .getElementById("giftReveal")
+            .classList.add("active");
+
+    }, 600);
 }
 
 
 /* =========================================
-   PAGE 4 — LETTER
+   LETTER
 ========================================= */
 
 function openLetter() {
@@ -297,23 +292,24 @@ function openLetter() {
     const envelope =
         document.getElementById("envelope");
 
-    const letter =
-        document.getElementById("letter");
-
     const envelopeText =
         document.getElementById("envelopeText");
 
+    const letter =
+        document.getElementById("letter");
 
-    // Open envelope animation
+
+    /* Open envelope animation */
+
     envelope.classList.add("open");
 
 
-    // Change text
     envelopeText.innerHTML =
-        "For you 💜";
+        "Opening your letter... 💜";
 
 
-    // Give animation time before showing letter
+    /* Show letter after animation */
+
     setTimeout(() => {
 
         envelope.style.display = "none";
@@ -323,42 +319,44 @@ function openLetter() {
         letter.classList.add("show");
 
     }, 700);
-
 }
 
 
 /* =========================================
-   PAGE 5 — FLOATING HEARTS
+   FLOATING HEARTS
 ========================================= */
 
 function startHeartAnimation() {
 
-    const container =
-        document.getElementById("heartContainer");
+    /* Don't create another interval */
+
+    if (heartInterval !== null) {
+        return;
+    }
 
 
-    // Clear old hearts
-    container.innerHTML = "";
-
-
-    // Create hearts continuously
-    setInterval(() => {
+    heartInterval = setInterval(() => {
 
         createHeart();
 
-    }, 350);
-
+    }, 500);
 }
 
 
 /* =========================================
-   CREATE ONE HEART
+   CREATE HEART
 ========================================= */
 
 function createHeart() {
 
     const container =
         document.getElementById("heartContainer");
+
+
+    if (!container) {
+        return;
+    }
+
 
     const heart =
         document.createElement("div");
@@ -367,8 +365,9 @@ function createHeart() {
     heart.classList.add("floating-heart");
 
 
-    // Different heart symbols
-    const hearts = [
+    /* Different floating symbols */
+
+    const symbols = [
         "💜",
         "💙",
         "💗",
@@ -378,25 +377,28 @@ function createHeart() {
 
 
     heart.innerHTML =
-        hearts[Math.floor(Math.random() * hearts.length)];
+        symbols[Math.floor(Math.random() * symbols.length)];
 
 
-    // Random horizontal position
+    /* Random position */
+
     heart.style.left =
         Math.random() * 100 + "%";
 
 
-    // Random size
+    /* Random size */
+
     const size =
-        Math.random() * 20 + 15;
+        18 + Math.random() * 30;
 
     heart.style.fontSize =
         size + "px";
 
 
-    // Random animation duration
+    /* Random animation speed */
+
     const duration =
-        Math.random() * 4 + 4;
+        4 + Math.random() * 4;
 
     heart.style.animationDuration =
         duration + "s";
@@ -405,11 +407,11 @@ function createHeart() {
     container.appendChild(heart);
 
 
-    // Remove after animation
+    /* Remove after animation */
+
     setTimeout(() => {
 
         heart.remove();
 
     }, duration * 1000);
-
 }
